@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinamik Banner</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f2f1; /* Yeşil tonlarında arka plan rengi */
+            color: #004d40; /* Koyu yeşil yazı rengi */
+        }
+        .banner {
+            background-color: #004d40; /* Koyu yeşil arka plan */
+            color: #ffffff; /* Beyaz yazı rengi */
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 12px;
+            position: fixed;
+            top: 20px;
+            width: calc(100% - 40px); /* Sağ ve sol kenarlardan padding */
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölgelendirme */
+        }
+        .banner.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    </style>
+</head>
+<body>
+    <div class="banner" id="banner"></div>
+
+    <script>
+        const messages = [
+            "Hoşgeldin!",
+            "Harika bir arkadaşsın!",
+            "Seni çok seviyorum!",
+            "Sana güzel bir gün dilerim!",
+            "Kendini üzme!",
+            "Sen olmasaydın belki de en yakın arkadaşım kara topraktı.",
+            "Seninle iyi ki tanışmışım!",
+            "Her zaman mükemmel şeyler yapıyorsun!"
+        ];
+
+        let messageIndex = 0;
+        const banner = document.getElementById('banner');
+
+        function updateBanner() {
+            banner.classList.add('hidden');
+            setTimeout(() => {
+                banner.innerText = messages[messageIndex];
+                banner.classList.remove('hidden');
+                messageIndex = (messageIndex + 1) % messages.length;
+            }, 500); // 0.5 saniyede mesaj değişir
+        }
+
+        setInterval(updateBanner, 3000); // 3 saniyede bir mesaj değişir
+        updateBanner(); // İlk mesajı hemen göster
+    </script>
+</body>
+</html>
